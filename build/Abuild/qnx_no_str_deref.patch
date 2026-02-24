@@ -1,0 +1,32 @@
+diff --git a/sample/callout.c b/sample/callout.c
+index b5e3d91..4bb3b75 100644
+--- a/sample/callout.c
++++ b/sample/callout.c
+@@ -34,11 +34,27 @@ callout_body(OnigCalloutArgs* args, void* user_data)
+     UChar* name = onig_get_callout_name_by_name_id(name_id);
+     fprintf(stdout, "name: %s\n", name);
+   }
++#ifdef __QNX__
++  if (contents == NULL) {
++    fprintf(stdout,
++            "%s %s: contents: NULL, start: \"%s\", current: \"%s\"\n",
++            "NAME",
++            in == ONIG_CALLOUT_IN_PROGRESS ? "PROGRESS" : "RETRACTION",
++            start, current);
++  } else {
++    fprintf(stdout,
++            "%s %s: contents: \"%s\", start: \"%s\", current: \"%s\"\n",
++            "CONTENTS",
++            in == ONIG_CALLOUT_IN_PROGRESS ? "PROGRESS" : "RETRACTION",
++            contents, start, current);
++  }
++#else
+   fprintf(stdout,
+           "%s %s: contents: \"%s\", start: \"%s\", current: \"%s\"\n",
+           contents != 0 ? "CONTENTS" : "NAME",
+           in == ONIG_CALLOUT_IN_PROGRESS ? "PROGRESS" : "RETRACTION",
+           contents, start, current);
++#endif
+ 
+   fprintf(stdout, "user_data: %s\n", (char* )user_data);
+ 
