@@ -3,7 +3,7 @@
 # Alpine-Maintainer: Francesco Colista <fcolista@alpinelinux.org>
 pkgname=oniguruma
 pkgver=6.9.10
-pkgrel=0
+pkgrel=${pkgrel:-0}
 pkgdesc="a regular expressions library"
 url="https://github.com/kkos/oniguruma"
 arch="all"
@@ -43,6 +43,7 @@ package() {
 }
 
 
+options="$options ${DISABLE_CHECK:+!check}"
 sha512sums="
 60975b876662dec8701cca5d8d4027c0a36b8effe7dd32679395ed473e26b3d6b72d7f6eb63bd4dc96c3774b594e56808ce14f993f127a5d04363232586160e4  oniguruma-6.9.10.tar.gz
 7ae77e451ae127b6551576aef5b8e5d8112ceed79bca757b9f5208a27e38b09d63b1fdb36ea6fbc5cbc5fc98b7bd415c85875350992b1488a4da207c60f9074b  qnx_no_str_deref.patch
